@@ -1,5 +1,9 @@
 # Local Setup
 
+You can set up the backend using either the **Manual Native Setup** or **Docker Compose (Recommended for easy Hot Reload)**.
+
+## Option 1: Manual Setup (Native)
+
 ## Prerequisites
 
 - Ruby (see `.ruby-version`)
@@ -78,7 +82,7 @@ Runs on **port 3001** by default.
 ## 7. Start the frontend
 
 ```bash
-cd ../ai-interview-web
+cd ../web
 npm install
 npm run dev
 ```
@@ -95,3 +99,28 @@ Runs on **port 5173** by default.
 | Sidekiq | `bundle exec sidekiq -r ./config/environment.rb -C config/sidekiq.yml` | — |
 | Rails API | `bundle exec rails server` | 3001 |
 | Frontend | `npm run dev` (in `ai-interview-web/`) | 5173 |
+
+
+## Option 2: Docker Compose Setup (Recommended)
+This project is configured with Docker Compose for a seamless local development experience.
+
+### 1. Environment Variables
+First, duplicate the sample environment configuration file:
+```bash
+cp config/application.yml.sample config/application.yml
+```
+> Note: Ensure the database credentials in config/application.yml match the environment variables defined in the docker-compose.yml file (e.g., DB_USERNAME: "postgres", DB_PASSWORD: "postgres").
+
+### 2. Build and Start the Containers
+```bash
+docker compose up --build
+```
+> (Leave this terminal window open to view the server logs).
+
+### 3. Setup Database
+```bash
+docker compose exec api bundle exec rails db:migrate 
+docker compose exec api bundle exec rails db:seed
+```
+
+Runs on **port 3001** by default.
