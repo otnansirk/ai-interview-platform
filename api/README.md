@@ -124,3 +124,19 @@ docker compose exec api bundle exec rails db:seed
 ```
 
 Runs on **port 3001** by default.
+
+---
+
+## Running Tests (RSpec)
+
+The backend uses RSpec for testing. Ensure your database is running before executing tests.
+
+**If using Docker Compose (Recommended):**
+```bash
+docker compose exec -e RAILS_ENV=test api bundle exec rspec
+```
+
+**If using Manual Native Setup:**
+```bash
+RAILS_ENV=test bundle exec rspec
+```
