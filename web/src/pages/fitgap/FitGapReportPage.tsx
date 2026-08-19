@@ -140,11 +140,48 @@ export default function FitGapReportPage() {
         )}
       </div>
 
-      {/* Generating */}
+      {/* Generating Skeletons */}
       {generating && (
-        <div className="border rounded-lg p-12 text-center space-y-3">
-          <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto" />
-          <p className="text-sm text-muted-foreground">Generating fit/gap report...</p>
+        <div className="space-y-6">
+          <Card className="border-primary/20 bg-primary/5">
+            <CardHeader className="pb-3 flex flex-row items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                <CardTitle className="text-sm font-medium text-primary">AI is analyzing portfolio...</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="px-4 pb-4 space-y-3">
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-full" />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm">Synthesizing Culture & Competency</CardTitle>
+            </CardHeader>
+            <CardContent className="px-4 pb-4 space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-[90%]" />
+              <Skeleton className="h-4 w-[95%]" />
+              <Skeleton className="h-4 w-[85%]" />
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Error / Empty State */}
+      {!loading && !generating && !report && (
+        <div className="border border-destructive/20 bg-destructive/10 rounded-lg p-12 text-center space-y-4">
+          <div className="text-destructive font-medium">Failed to generate report</div>
+          <p className="text-sm text-muted-foreground max-w-md mx-auto">
+            The AI encountered an issue while generating the Fit/Gap narrative. Please try again.
+          </p>
+          <Button variant="outline" onClick={handleRegenerate} disabled={regenerating}>
+             {regenerating ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <RefreshCw className="h-4 w-4 mr-2" />}
+             Retry Analysis
+          </Button>
         </div>
       )}
 
@@ -169,7 +206,7 @@ export default function FitGapReportPage() {
               <CardTitle className="text-sm">Culture &amp; Competency Fit</CardTitle>
             </CardHeader>
             <CardContent className="px-4 pb-4">
-              <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap">
+              <p className="text-sm leading-relaxed text-foreground whitespace-pre-wrap break-words">
                 {report.culture_narrative || report.overall_narrative}
               </p>
             </CardContent>
