@@ -9,7 +9,7 @@ import { sessionsApi } from "@/services/sessions";
 import { vacanciesApi } from "@/services/vacancies";
 import { portfoliosApi } from "@/services/portfolios";
 import { usePolling } from "@/hooks/usePolling";
-import { ArrowLeft, Download, FileText, Loader2, Zap, MoreVertical } from "lucide-react";
+import { ArrowLeft, Download, FileText, Loader2, Zap, MoreVertical, RefreshCw } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
