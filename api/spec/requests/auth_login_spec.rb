@@ -10,8 +10,8 @@ RSpec.describe 'Auth Login', type: :request do
       parameter name: :credentials, in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
-          password: { type: :string }
+          email: { type: :string, example: 'admin@rakamin.com' },
+          password: { type: :string, example: 'password123' }
         }
       }
 
