@@ -23,8 +23,10 @@ paths:
               properties:
                 email:
                   type: string
+                  example: admin@rakamin.com
                 password:
                   type: string
+                  example: password123
   "/api/v1/health":
     get:
       summary: Checks the health of the API
@@ -42,8 +44,57 @@ paths:
                     type: string
                 required:
                 - status
+  "/api/v1/vacancies":
+    get:
+      summary: Retrieves a list of vacancies
+      tags:
+      - Vacancies
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: List of vacancies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vacancies:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        role_title:
+                          type: string
+                        culture_dimensions:
+                          type: string
+                        competency_expectations:
+                          type: string
+                        created_by:
+                          type: integer
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                  meta:
+                    type: object
+                required:
+                - vacancies
+                - meta
+        '403':
+          description: Tenant not found
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3001
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
