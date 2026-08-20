@@ -44,6 +44,85 @@ paths:
                     type: string
                 required:
                 - status
+  "/api/v1/portfolios/{id}/fitgap":
+    parameters:
+    - name: id
+      in: path
+      description: ID Portfolio
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Generate Fit/Gap Analysis
+      tags:
+      - Portfolios
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '202':
+          description: Fit/Gap successfully generated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vacancy_id:
+                  type: string
+              required:
+              - vacancy_id
+  "/api/v1/portfolios/{id}/regenerate_fitgap":
+    parameters:
+    - name: id
+      in: path
+      description: ID Portfolio
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Regenerate Fit/Gap Analysis
+      tags:
+      - Portfolios
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '202':
+          description: Fit/Gap successfully regenerated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vacancy_id:
+                  type: string
+              required:
+              - vacancy_id
+  "/api/v1/portfolios/{id}/fitgap/{vacancy_id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID Portfolio
+      required: true
+      schema:
+        type: string
+    - name: vacancy_id
+      in: path
+      description: ID Vacancy
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieves Fit/Gap Analysis result
+      tags:
+      - Portfolios
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: Displays analysis result
   "/api/v1/vacancies":
     get:
       summary: Retrieves a list of vacancies
