@@ -140,3 +140,26 @@ docker compose exec -e RAILS_ENV=test api bundle exec rspec
 ```bash
 RAILS_ENV=test bundle exec rspec
 ```
+
+---
+
+## API Documentation (Swagger)
+
+This project uses `rswag` for API documentation. The documentation is generated automatically based on the integration tests.
+
+**To view the API documentation:**
+1. Ensure your Rails server is running.
+2. Open your browser and navigate to: `http://localhost:3001/api-docs`
+
+**To update and regenerate the documentation:**
+Rswag uses Test-Driven Documentation. We have provided a custom Rake task that automatically runs the API integration tests and regenerates the Swagger YAML only if the tests pass.
+
+**If using Docker Compose (Recommended):**
+```bash
+docker compose exec api bundle exec rake docs:generate
+```
+
+**If using Manual Native Setup:**
+```bash
+bundle exec rake docs:generate
+```
