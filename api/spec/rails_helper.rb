@@ -25,6 +25,11 @@ RSpec.configure do |config|
   # Filter Rails framework backtrace for cleaner output
   config.filter_rails_from_backtrace!
 
+  # Override default host for Rswag/Request specs to avoid Host Authorization block
+  config.before(:each, type: :request) do
+    host! "127.0.0.1"
+  end
+
   # Clear RequestStore between tests to prevent tenant/user bleed
   config.before(:each) do
     RequestStore.clear!
