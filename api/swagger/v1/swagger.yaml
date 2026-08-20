@@ -1,0 +1,28 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/health":
+    get:
+      summary: Checks the health of the API
+      tags:
+      - Health
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                required:
+                - status
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3001
