@@ -145,7 +145,7 @@ export default function AssessmentInvitePage() {
     ]).then(([aRes, sRes]) => {
       setAssessment(aRes.data.assessment);
       setSessions(sRes.data.sessions);
-    }).catch(() => {}).finally(() => setLoading(false));
+    }).catch(() => { }).finally(() => setLoading(false));
   }, [id]);
 
   // Poll while any session is live or pending
@@ -201,7 +201,7 @@ export default function AssessmentInvitePage() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row justify-between">
         <div className="flex items-center gap-2">
           <Link to="/assessments" className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" />
@@ -215,7 +215,7 @@ export default function AssessmentInvitePage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mt-5 sm:mt-0 justify-end">
           <Button variant="outline" size="sm" onClick={() => navigate(`/assessments/${id}/edit`)}>
             <Pencil className="h-3.5 w-3.5 mr-1.5" /> Edit
           </Button>

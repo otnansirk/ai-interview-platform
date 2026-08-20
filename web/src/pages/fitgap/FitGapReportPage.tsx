@@ -8,7 +8,13 @@ import ComparisonTable from "@/components/fitgap/ComparisonTable";
 import { portfoliosApi } from "@/services/portfolios";
 import { sessionsApi } from "@/services/sessions";
 import { usePolling } from "@/hooks/usePolling";
-import { ArrowLeft, Download, Loader2, RefreshCw, Zap } from "lucide-react";
+import { ArrowLeft, Download, Loader2, RefreshCw, Zap, MoreVertical } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import type { FitGapReport, Portfolio } from "@/types";
 
 export default function FitGapReportPage() {
@@ -119,24 +125,56 @@ export default function FitGapReportPage() {
         </div>
 
         {portfolio && (
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={handleRegenerate} disabled={regenerating || generating}>
-              {regenerating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RefreshCw className="h-3.5 w-3.5 mr-1" />}
-              Regenerate
-            </Button>
-            {report && (
-              <>
-                <Button variant="outline" size="sm" onClick={() => handleExport("pdf")} disabled={!!exporting}>
-                  {exporting === "pdf" ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5 mr-1" />}
-                  PDF
-                </Button>
-                <Button variant="outline" size="sm" onClick={() => handleExport("json")} disabled={!!exporting}>
-                  {exporting === "json" ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5 mr-1" />}
-                  JSON
-                </Button>
-              </>
-            )}
-          </div>
+          <>
+            {/* Desktop View */}
+            <div className="hidden sm:flex gap-2">
+              <Button variant="outline" size="sm" onClick={handleRegenerate} disabled={regenerating || generating}>
+                {regenerating ? <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" /> : <RefreshCw className="h-3.5 w-3.5 mr-1" />}
+                Regenerate
+              </Button>
+              {report && (
+                <>
+                  <Button variant="outline" size="sm" onClick={() => handleExport("pdf")} disabled={!!exporting}>
+                    {exporting === "pdf" ? <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" /> : <Download className="h-3.5 w-3.5 mr-1" />}
+                    PDF
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => handleExport("json")} disabled={!!exporting}>
+                    {exporting === "json" ? <Loader2 className="h-3.5 w-3.5 animate-spin mr-1" /> : <Download className="h-3.5 w-3.5 mr-1" />}
+                    JSON
+                  </Button>
+                </>
+              )}
+            </div>
+
+            {/* Mobile View */}
+            <div className="sm:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                    <MoreVertical className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={handleRegenerate} disabled={regenerating || generating}>
+                    {regenerating ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <RefreshCw className="h-4 w-4 mr-2" />}
+                    Regenerate
+                  </DropdownMenuItem>
+                  {report && (
+                    <>
+                      <DropdownMenuItem onClick={() => handleExport("pdf")} disabled={!!exporting}>
+                        {exporting === "pdf" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Download className="h-4 w-4 mr-2" />}
+                        Export PDF
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleExport("json")} disabled={!!exporting}>
+                        {exporting === "json" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Download className="h-4 w-4 mr-2" />}
+                        Export JSON
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </>
         )}
       </div>
 
