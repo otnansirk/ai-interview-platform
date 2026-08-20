@@ -123,6 +123,23 @@ paths:
       responses:
         '200':
           description: Displays analysis result
+  "/api/v1/sessions/{id}/portfolio":
+    parameters:
+    - name: id
+      in: path
+      description: ID Session
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieves Portfolio details by Session
+      tags:
+      - Sessions
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: Displays portfolio details
   "/api/v1/vacancies":
     get:
       summary: Retrieves a list of vacancies
