@@ -55,6 +55,7 @@ services:
       - LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libjemalloc.so.2
     command: >
       sh -c "bundle config unset without &&
+             bundle config set frozen false &&
              bundle install &&
              bundle exec sidekiq -r ./config/environment.rb -C config/sidekiq.yml"
 
@@ -82,6 +83,7 @@ services:
       - LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libjemalloc.so.2
     command: >
       sh -c "bundle config unset without &&
+             bundle config set frozen false &&
              bundle install &&
              mkdir -p tmp/pids tmp/cache tmp/sockets log &&
              rm -f tmp/pids/server.pid &&
