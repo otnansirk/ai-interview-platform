@@ -325,12 +325,17 @@ export default function AssessmentInvitePage() {
         </div>
 
         {sessions.length === 0 ? (
-          <div className="border rounded-lg p-10 text-center space-y-3">
-            <UserRound className="h-8 w-8 text-muted-foreground mx-auto" />
+          <div className="border-2 border-dashed border-zinc-200 rounded-2xl p-12 text-center bg-zinc-50/50 hover:bg-zinc-50 hover:border-zinc-300 transition-all duration-300">
+            <div className="w-16 h-16 bg-white border border-zinc-100 rounded-2xl flex items-center justify-center shadow-sm mx-auto mb-5 relative">
+              <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-indigo-50 text-primary rounded-full flex items-center justify-center">
+                <Plus className="w-3 h-3" />
+              </div>
+              <UserRound className="h-8 w-8 text-zinc-400" />
+            </div>
             <div>
-              <p className="text-sm font-medium">No candidates yet</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Click "Invite Candidate" to generate an interview link.
+              <p className="text-lg font-bold text-zinc-900 mb-1.5">No candidates invited yet</p>
+              <p className="text-sm text-zinc-500 max-w-sm mx-auto leading-relaxed">
+                Click <span className="font-medium text-zinc-700">"Invite Candidate"</span> above to generate a unique interview link.
               </p>
             </div>
           </div>
