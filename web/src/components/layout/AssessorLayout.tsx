@@ -1,4 +1,4 @@
-import { ClipboardList, Briefcase, LogOut, Menu } from "lucide-react";
+import { ClipboardList, Briefcase, LogOut, Menu, LayoutDashboard } from "lucide-react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { authAtom, clearToken } from "@/stores/authAtom";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -39,6 +39,7 @@ export default function AssessorLayout() {
 
           {/* Logo Brand */}
           <div className="flex items-center gap-3">
+            <LayoutDashboard className="h-5 w-5 text-black" />
             <span className="font-bold text-zinc-900 tracking-tight text-lg">
               Rakamin<span className="text-zinc-500 font-normal"> AI Interview</span>
             </span>
