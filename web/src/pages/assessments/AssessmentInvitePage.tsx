@@ -38,9 +38,9 @@ function SessionRow({
   const displayName = session.candidate_name || `Candidate ${index}`;
 
   return (
-    <div className="flex items-center justify-between py-3 px-4">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between py-4 px-4 gap-4">
       <div className="flex items-center gap-3">
-        <div className="flex items-center justify-center w-7 h-7 rounded-full bg-muted text-xs font-medium text-muted-foreground">
+        <div className="flex items-center justify-center shrink-0 w-8 h-8 rounded-full bg-muted text-xs font-medium text-muted-foreground">
           {index}
         </div>
         <div className="space-y-0.5">
@@ -53,7 +53,7 @@ function SessionRow({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center flex-wrap gap-2 sm:gap-3 ml-11 sm:ml-0">
         {isPending && (
           <span className="flex items-center gap-1 text-xs text-amber-600">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
@@ -79,12 +79,12 @@ function SessionRow({
           </span>
         )}
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 w-full sm:w-auto mt-1 sm:mt-0">
           {isPending && (
             <Button
               variant="ghost"
               size="sm"
-              className="h-7 px-2 text-xs"
+              className="h-7 px-2 text-xs flex-1 sm:flex-none"
               onClick={() => onCopy(session.id)}
             >
               {copiedId === session.id ? (
@@ -98,7 +98,7 @@ function SessionRow({
             <Button
               variant="outline"
               size="sm"
-              className="h-7 px-2 text-xs"
+              className="h-7 px-2 text-xs flex-1 sm:flex-none"
               onClick={() => navigate(`/assessments/${assessmentId}/sessions/${session.id}/monitor`)}
             >
               <Eye className="h-3 w-3 mr-1" /> Monitor
@@ -108,7 +108,7 @@ function SessionRow({
             <Button
               variant="outline"
               size="sm"
-              className="h-7 px-2 text-xs"
+              className="h-7 px-2 text-xs flex-1 sm:flex-none"
               onClick={() => navigate(`/assessments/${assessmentId}/sessions/${session.id}/portfolio`)}
             >
               Results
@@ -212,15 +212,15 @@ export default function AssessmentInvitePage() {
           <Card className="border-zinc-100 shadow-sm rounded-2xl overflow-hidden">
             <CardContent className="p-0 divide-y divide-zinc-50">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center justify-between p-4">
+                <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 gap-4">
                   <div className="flex items-center gap-3">
-                    <Skeleton className="h-8 w-8 rounded-full bg-zinc-100" />
+                    <Skeleton className="h-8 w-8 rounded-full bg-zinc-100 shrink-0" />
                     <div className="space-y-2">
-                      <Skeleton className="h-4 w-40 rounded-md bg-zinc-200/60" />
-                      <Skeleton className="h-3 w-24 rounded-md bg-zinc-100" />
+                      <Skeleton className="h-4 w-32 sm:w-40 rounded-md bg-zinc-200/60" />
+                      <Skeleton className="h-3 w-20 sm:w-24 rounded-md bg-zinc-100" />
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex items-center gap-2 ml-11 sm:ml-0">
                     <Skeleton className="h-7 w-24 rounded-md bg-zinc-100" />
                     <Skeleton className="h-7 w-16 rounded-md bg-zinc-100" />
                   </div>
