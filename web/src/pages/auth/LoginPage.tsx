@@ -1,4 +1,4 @@
-import { Loader2, BrainCircuit, Mail, Lock } from "lucide-react";
+import { Loader2, BrainCircuit, Mail, Lock, LayoutDashboard } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { authAtom, saveToken } from "@/stores/authAtom";
 import { Button } from "@/components/ui/button";
@@ -42,10 +42,12 @@ export default function LoginPage() {
           <div className="text-center space-y-2">
             <div className="flex justify-center mb-6">
               <div className="h-12 w-12 bg-primary rounded-xl flex items-center justify-center">
-                <BrainCircuit className="h-7 w-7 text-white" />
+                <LayoutDashboard className="h-7 w-7 text-white" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight">AI Interview Platform</h2>
+            <span className="font-bold text-zinc-900 tracking-tight text-3xl">
+              Rakamin<span className="text-zinc-500 font-normal"> AI Interview</span>
+            </span>
             <p className="text-muted-foreground">Enter your credentials to access the dashboard</p>
           </div>
 
