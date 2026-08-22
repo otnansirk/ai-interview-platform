@@ -190,16 +190,51 @@ export default function AssessmentInvitePage() {
 
   if (loading) {
     return (
-      <div className="max-w-2xl mx-auto space-y-4">
-        <Skeleton className="h-8 w-64" />
-        <Skeleton className="h-32 w-full" />
-        <Skeleton className="h-48 w-full" />
+      <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500 py-2">
+        {/* Header Skeleton */}
+        <div className="flex flex-col sm:flex-row justify-between gap-5">
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-56 rounded-lg bg-zinc-200/60" />
+            <Skeleton className="h-4 w-36 rounded-md bg-zinc-100" />
+          </div>
+          <div className="flex items-center gap-2 mt-2 sm:mt-0">
+            <Skeleton className="h-9 w-20 rounded-lg bg-zinc-100" />
+            <Skeleton className="h-9 w-36 rounded-lg bg-zinc-200/60" />
+          </div>
+        </div>
+
+        {/* Separator Skeleton */}
+        <Skeleton className="h-px w-full bg-zinc-100" />
+
+        {/* Candidates Section Skeleton */}
+        <div className="space-y-4">
+          <Skeleton className="h-5 w-28 rounded-md bg-zinc-200/60" />
+          <Card className="border-zinc-100 shadow-sm rounded-2xl overflow-hidden">
+            <CardContent className="p-0 divide-y divide-zinc-50">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="flex items-center justify-between p-4">
+                  <div className="flex items-center gap-3">
+                    <Skeleton className="h-8 w-8 rounded-full bg-zinc-100" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-40 rounded-md bg-zinc-200/60" />
+                      <Skeleton className="h-3 w-24 rounded-md bg-zinc-100" />
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Skeleton className="h-7 w-24 rounded-md bg-zinc-100" />
+                    <Skeleton className="h-7 w-16 rounded-md bg-zinc-100" />
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500 pb-10">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between">
         <div className="flex items-center gap-2">
