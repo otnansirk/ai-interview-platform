@@ -2,7 +2,9 @@
 **Project:** AI Interview Platform (Rakamin Fullstack Product Engineer Assessment)
 **Candidate:** Krisnanto
 
-This document contains the complete sequence of all bug fixes, features, and architectural decisions that we have executed from start to finish. The order below is arranged based on **Priority/Impact Level**, starting from the most critical for the system to aesthetic improvements.
+This document contains the complete sequence of all bug fixes, features, and architectural decisions that we have executed from start to finish. All of these changes were delivered using the **"Umbrella PR" strategy** (Option B) under a single main PR (#96, `feature/fitgap-monozukuri`), which consolidates 11 smaller, focused sub-PRs.
+
+The order below is arranged based on **Priority/Impact Level**, starting from the most critical for the system to aesthetic improvements.
 
 ---
 
@@ -36,8 +38,8 @@ This document contains the complete sequence of all bug fixes, features, and arc
    - Configured `Vitest` + `@testing-library/react` + `MSW` for the frontend.
    - Created *GitHub Actions* to run backend and frontend tests in parallel on every Push/PR.
 7. **Resilience Testing (Seeded Faults) & Data Privacy Compliance**
-   - **Resilience:** Forced the Gemini API mock to *Timeout*, and proved that the *Fit/Gap Engine* does not crash, but instead shows a *Fallback Narrative*.
-   - **Data Privacy (UU PDP):** Intervened in the *Rails Logger* in the test suite to ensure API Keys and candidate *Personally Identifiable Information (PII)* never leak into the logs.
+   - **Resilience & Seeded Fault Proof:** Executed on a separate scratch branch (`seeded-fault-proof`) by intentionally breaking the logic, verifying that RSpec caught the failure, and then reverting it back to normal. We proved the *Fit/Gap Engine* does not crash on timeout, but instead gracefully shows a *Fallback Narrative*.
+   - **Data Privacy (UU PDP):** Intervened in the *Rails Logger* in the test suite to ensure API Keys and candidate *Personally Identifiable Information (PII)* never leak into the server logs.
 
 ---
 
