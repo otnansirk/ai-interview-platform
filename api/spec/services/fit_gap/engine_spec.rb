@@ -59,5 +59,29 @@ RSpec.describe FitGap::Engine, type: :service do
         expect(log_contents).not_to include(session.candidate_id.to_s) if session.candidate_id.present?
       end
     end
+    
+    context '[SEEDED FAULT] expected_level integrity' do
+      it 'produces correct expected_level values in skill comparisons' do
+        engine = described_class.new(
+          portfolio: portfolio,
+          vacancy: vacancy,
+          gemini_client: gemini_client_mock
+        )
+
+        allow(gemini_client_mock).to receive(:generate_content)
+          .and_raise(StandardError, "Gemini API Timeout")
+
+        engine.call
+
+        report = FitGapReport.find_by(portfolio_id: portfolio.id, vacancy_id: vacancy.id)
+        comparisons = report.skill_comparisons
+
+        comparisons.each do |comp|
+          # expected_level HARUS antara 1-5 (sesuai constraint DB)
+          expect(comp['expected_level']).to be_between(1, 5),
+            "expected_level #{comp['expected_level']} for skill '#{comp['skill_label']}' is out of valid range 1..5"
+        end
+      end
+    end
   end
 end
