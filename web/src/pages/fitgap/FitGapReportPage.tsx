@@ -37,17 +37,28 @@ export default function FitGapReportPage() {
       const res = await portfoliosApi.getFitGap(portfolio.id, Number(vacancyId));
       setReport(res.data.report);
       setGenerating(false);
+      setError(null);
     } catch (e: any) {
       if (e?.response?.status === 404) {
+        // If we are already polling, don't trigger again, just wait.
+        if (generating) return;
+        
         try {
           await portfoliosApi.triggerFitGap(portfolio.id, Number(vacancyId));
           setGenerating(true);
+          setError(null);
         } catch {
           setGenerating(false);
+          setError("Failed to trigger Fit/Gap generation.");
         }
+      } else {
+         setTimeout(() => {
+           setGenerating(false);
+           setError("An error occurred while fetching the report.");
+         }, 1200); // Jeda 1.2 detik agar skeleton loading terlihat dulu
       }
     }
-  }, [portfolio, vacancyId]);
+  }, [portfolio, vacancyId, generating]);
 
   useEffect(() => {
     sessionsApi
