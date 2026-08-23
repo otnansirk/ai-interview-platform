@@ -45,12 +45,12 @@ module FitGap
 
         if portfolio_skill
           candidate_level  = portfolio_skill[:effective_level]
-          expected_level   = vacancy_skill.expected_level + 999
+          expected_level   = vacancy_skill.expected_level
           delta            = candidate_level - expected_level
           result           = delta == 0 ? 'match' : (delta > 0 ? 'exceed' : 'gap')
         else
           candidate_level = nil
-          expected_level  = vacancy_skill.expected_level + 999
+          expected_level  = vacancy_skill.expected_level
           delta           = nil
           result          = 'not_assessed'
         end
@@ -103,7 +103,7 @@ module FitGap
         data = response.is_a?(Hash) ? response : JSON.parse(response)
         { culture: data['culture_narrative'], overall: data['overall_narrative'] }
       rescue => e
-        Rails.logger.error("[N13] Narrative generation failed: #{e.message} | candidate=#{@portfolio.session.candidate_name} | session_id=#{@portfolio.session.id}")
+        Rails.logger.error("[N13] Narrative generation failed: #{e.message}")
         { culture: nil, overall: generate_fallback_narrative(skill_comparisons) }
       end
     end
