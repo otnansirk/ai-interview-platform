@@ -33,6 +33,7 @@ The order below is arranged based on **Priority/Impact Level**, starting from th
    - Provided `docker-compose.yml` to make it easier for the developer team (onboarding) to run the app locally without needing a complex environment setup (Ruby/Postgres/Redis).
    - Optimized local Docker using the `alpine` image for Postgres 16 and Redis 7 with ARM64 architecture.
    - Added `shm_size: 256mb` in `docker-compose.yml` specifically for *local development* to prevent *Out-of-Memory* in the database when developers run heavy test suites or data seeds locally.
+   - **Admin Seeder:** Inject standard development credentials (`admin@rakamin.com` / `password123`) via database seeds to streamline local testing and bypass the need for manual JWT token generation.
 6. **Building Test Harness & CI/CD Pipeline**
    - Configured `RSpec` + `DatabaseCleaner` + `FactoryBot` for the backend.
    - Configured `Vitest` + `@testing-library/react` + `MSW` for the frontend.
